@@ -22,9 +22,7 @@ bin/
 *.iws
 *.iml
 *.ipr
-*.gradle
 *.jar
-*.bat
 gradle*
 out/
 !**/src/main/**/out/
