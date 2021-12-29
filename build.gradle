@@ -23,6 +23,9 @@ dependencies {
 //	implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
 //	implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '3.0.1'
 	annotationProcessor ('org.projectlombok:lombok')
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.5.5'
+	implementation group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version: '2.6.1'
+
 }
 
 test {
