@@ -11,6 +11,7 @@
     "sockjs-client": "^1.5.2",
     "vue": "^2.5.17",
     "vue-resource": "^1.5.1",
+    "vue-router": "^3.5.3",
     "vuetify": "^2.6.2",
     "vuex": "^3.6.2"
   },
