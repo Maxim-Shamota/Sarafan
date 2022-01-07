@@ -2,8 +2,9 @@
 	<v-layout>
 		<v-text-field
 			label="New message"
-			placeholder="write something"
+			placeholder="Write something"
 			v-model="text"
+			@keyup.enter="save"
 		/>
 		<v-btn @click="save">
 			Save
@@ -33,7 +34,8 @@ export default {
 		save() {
 			const message = {
 				id: this.id,
-				text: this.text };
+				text: this.text
+			}
 
 			if (this.id) {
 				this.updateMessageAction(message)

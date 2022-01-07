@@ -3,20 +3,20 @@ package site.shamota.sarafan.domain;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
-import lombok.*;
-import org.hibernate.Hibernate;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Objects;
+import java.util.List;
 
 @Entity
 @Table
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@ToString(of = {"id", "text"})
+@Data
 @JsonAutoDetect
+@EqualsAndHashCode(of = {"id"})
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,6 +30,15 @@ public class Message {
     @JsonView(Views.FullMessage.class)
     private LocalDateTime creationDate;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonView(Views.FullMessage.class)
+    private User author;
+
+    @OneToMany(mappedBy = "message", orphanRemoval = true)
+    @JsonView(Views.FullMessage.class)
+    private List<Comment> comments;
+
     @JsonView(Views.FullMessage.class)
     private String link;
     @JsonView(Views.FullMessage.class)
@@ -38,17 +47,4 @@ public class Message {
     private String linkDescription;
     @JsonView(Views.FullMessage.class)
     private String linkCover;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Message message = (Message) o;
-        return id != null && Objects.equals(id, message.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }
