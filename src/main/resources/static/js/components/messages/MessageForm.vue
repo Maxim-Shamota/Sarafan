@@ -13,18 +13,17 @@
 </template>
 
 <script>
-import { mapActions } from "vuex"
-
+import { mapActions } from 'vuex'
 export default {
 	props: ['messageAttr'],
 	data() {
 		return {
 			text: '',
-			id: ''
+			id: null
 		}
 	},
 	watch: {
-		messageAttr: function (newVal, oldVal) {
+		messageAttr(newVal, oldVal) {
 			this.text = newVal.text
 			this.id = newVal.id
 		}
@@ -36,7 +35,6 @@ export default {
 				id: this.id,
 				text: this.text
 			}
-
 			if (this.id) {
 				this.updateMessageAction(message)
 			} else {
@@ -44,7 +42,7 @@ export default {
 			}
 
 			this.text = ''
-			this.id = ''
+			this.id = null
 		}
 	}
 }

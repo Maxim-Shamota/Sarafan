@@ -1,8 +1,6 @@
 package site.shamota.sarafan.domain;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -14,9 +12,12 @@ import java.util.List;
 @Entity
 @Table
 @ToString(of = {"id", "text"})
-@Data
-@JsonAutoDetect
 @EqualsAndHashCode(of = {"id"})
+@Data
+@JsonIdentityInfo(
+        property = "id",
+        generator = ObjectIdGenerators.PropertyGenerator.class
+)
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,4 +48,11 @@ public class Message {
     private String linkDescription;
     @JsonView(Views.FullMessage.class)
     private String linkCover;
+
+    public void setComments(List<Comment> comments) {
+        this.comments.clear();
+        if (comments != null) {
+            this.comments.addAll(comments);
+        }
+    }
 }
